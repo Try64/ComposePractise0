@@ -4,14 +4,21 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.try64.composepractise0.ui.theme.AlarmClockTheme
+import com.try64.composepractise0.ui.theme.NavigationBarShadowColor
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,12 +55,63 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun NavigationBarComponent() {
-    Text("Hello")
+    BottomNavigation(
+        modifier = Modifier.shadow(ambientColor = NavigationBarShadowColor, elevation = 50.dp, clip = true)
+            .clip(RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp))
+    ){
+        BottomNavigationItem(
+            icon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_outline_alarm_24),
+                    contentDescription = null
+                )
+            },
+            selected = false, onClick = { }
+        )
+        BottomNavigationItem(
+            icon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_baseline_hourglass_bottom_24),
+                    contentDescription = null
+                )
+            },
+            selected = false, onClick = { }
+        )
+        BottomNavigationItem(
+            icon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_outline_access_time_24),
+                    contentDescription = null
+                )
+            },
+            selected = true, onClick = { }
+        )
+        BottomNavigationItem(
+            icon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_outline_timer_24),
+                    contentDescription = null
+                )
+            },
+            selected = false, onClick = { }
+        )
+        BottomNavigationItem(
+            icon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_outline_hotel_24),
+                    contentDescription = null
+                )
+            },
+            selected = false, onClick = { }
+        )
+    }
 }
 
 @Composable
 fun HeaderComponent() {
-    Text("Hello")
+    Box(modifier = Modifier.padding(vertical = 16.dp)) {
+        Text("Clock", style = MaterialTheme.typography.h2)
+    }
 }
 
 @Composable
