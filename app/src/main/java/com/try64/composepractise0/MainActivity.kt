@@ -70,7 +70,10 @@ class MainActivity : ComponentActivity() {
                                 contentAlignment = Alignment.Center
                             ) {
                                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                    AnalogClockComponent()
+                                    AnalogClockComponent(
+                                        hour = hour.toInt(),
+                                        minute = minute.toInt(),
+                                        second = second.toInt())
                                     Spacer(modifier = Modifier.height(24.dp))
                                     DigitalCLockComponent(
                                         hour = hour,
@@ -149,11 +152,6 @@ fun HeaderComponent() {
     Box(modifier = Modifier.padding(vertical = 16.dp)) {
         Text("Clock", style = MaterialTheme.typography.h2)
     }
-}
-
-@Composable
-fun AnalogClockComponent() {
-
 }
 
 @Composable
