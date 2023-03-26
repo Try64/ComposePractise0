@@ -3,13 +3,14 @@ package com.try64.composepractise0
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.try64.composepractise0.ui.theme.AlarmClockTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,12 +18,28 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AlarmClockTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Android")
+                Scaffold(bottomBar = { NavigationBarComponent() }) {
+                    Box(
+                        modifier = Modifier
+                            .padding(it)
+                            .fillMaxSize()
+                    ) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            HeaderComponent()
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .fillMaxHeight(fraction = 0.8f)
+                            ) {
+                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                    AnalogClockComponent()
+                                    Spacer(modifier = Modifier.height(24.dp))
+                                    DigitalCLockComponent()
+                                }
+                            }
+
+                        }
+                    }
                 }
             }
         }
@@ -30,14 +47,22 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun NavigationBarComponent() {
+    Text("Hello")
 }
 
-@Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
-    AlarmClockTheme {
-        Greeting("Android")
-    }
+fun HeaderComponent() {
+    Text("Hello")
 }
+
+@Composable
+fun AnalogClockComponent() {
+
+}
+
+@Composable
+fun DigitalCLockComponent() {
+
+}
+
